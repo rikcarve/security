@@ -1,7 +1,7 @@
 # Java Security 1x1
 ## Keytool
 ```shell
-keytool -importpass -storetype pkcs12 -alias myEntry -keystore password-store.p12
+keytool -importpass -storetype pkcs12 -alias myentry -keystore password-store.p12
 keytool -list -keystore password-store.p12 -storetype pkcs12
 ```
 
@@ -35,4 +35,17 @@ elytron-tool.bat mask -i 351 -s A1B2C3D4 -x mypwd
                         <user-name>rik</user-name>
                         <credential-reference store="cs12" alias="dbpwd"/>
                     </security>
+```
+
+## Java code
+```java
+    public static void main(String[] args) throws Exception {
+        KeyStore keyStore = KeyStore.getInstance("pkcs12");
+        char[] pwdArray = "mypwd".toCharArray();
+        keyStore.load(new FileInputStream("password-store.p12"), pwdArray);
+        SecretKeyEntry ske = (SecretKeyEntry) keyStore.getEntry("myentry", new KeyStore.PasswordProtection(pwdArray));       
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBE");
+        PBEKeySpec keySpec = (PBEKeySpec)factory.getKeySpec(ske.getSecretKey(), PBEKeySpec.class);
+        System.out.println(new String(keySpec.getPassword()));
+    }
 ```
