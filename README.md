@@ -27,7 +27,7 @@ elytron-tool.bat mask -i 351 -s A1B2C3D4 -x mypwd
 ```
 
 ### Use elytron in datasource
-```
+```xml
                 <datasource jndi-name="java:/jdbc/myDS" pool-name="MySqlDS">
                     <connection-url>jdbc:mysql://localhost:3306/test</connection-url>
                     <driver>mysql</driver>
