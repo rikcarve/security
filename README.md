@@ -33,6 +33,6 @@ elytron-tool.bat mask -i 351 -s A1B2C3D4 -x mypwd
                     <driver>mysql</driver>
                     <security>
                         <user-name>rik</user-name>
-                        <credential-reference store="jce" alias="dbpwd"/>
+                        <credential-reference store="cs12" alias="dbpwd"/>
                     </security>
 ```
